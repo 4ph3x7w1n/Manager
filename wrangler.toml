@@ -1,0 +1,25 @@
+name = "incident-management-console"
+main = ".svelte-kit/cloudflare-workers/index.js"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm run build"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "your-kv-namespace-id"
+preview_id = "your-preview-kv-namespace-id"
+
+[vars]
+# Environment variables will be added here
+# SLACK_BOT_TOKEN = "your-slack-token"
+# INCIDENT_IO_API_KEY = "your-incident-io-key"
+# JIRA_API_TOKEN = "your-jira-token"
+# VACATION_TRACKER_API_KEY = "your-vacation-tracker-key"
+
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
