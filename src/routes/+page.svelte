@@ -28,8 +28,12 @@
 	async function refreshAllData() {
 		isLoading.set(true);
 		try {
-			const apiClient = getApiClient();
-			const newData = await apiClient.getAllDashboardData();
+			// Fetch from our API endpoint
+			const response = await fetch('/api/dashboard');
+			if (!response.ok) {
+				throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+			}
+			const newData = await response.json();
 			
 			// Check for new incidents to notify about
 			const currentIncidents = $dashboardData.incidents.incidents;
@@ -150,7 +154,6 @@
 
 	.dashboard-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 		gap: var(--spacing-lg);
 		transition: opacity var(--transition-normal);
 	}
@@ -169,31 +172,55 @@
 		transform: translateY(-2px);
 	}
 
+	/* Incident panel takes full width and more height */
+	.incident-panel {
+		grid-column: 1 / -1;
+		min-height: 600px;
+	}
+
+	/* Other panels in a row below */
+	.slack-panel,
+	.jira-panel,
+	.vacation-panel {
+		min-height: 400px;
+	}
+
 	/* Specific panel positioning for larger screens */
 	@media (min-width: 1200px) {
 		.dashboard-grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(3, 1fr);
 			grid-template-rows: auto auto;
+		}
+
+		.incident-panel {
+			grid-column: 1 / -1;
+			grid-row: 1;
 		}
 
 		.slack-panel {
 			grid-column: 1;
-			grid-row: 1;
-		}
-
-		.incident-panel {
-			grid-column: 2;
-			grid-row: 1;
+			grid-row: 2;
 		}
 
 		.jira-panel {
-			grid-column: 1;
+			grid-column: 2;
 			grid-row: 2;
 		}
 
 		.vacation-panel {
-			grid-column: 2;
+			grid-column: 3;
 			grid-row: 2;
+		}
+	}
+
+	/* Medium screens */
+	@media (min-width: 768px) and (max-width: 1199px) {
+		.dashboard-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.incident-panel {
+			grid-column: 1 / -1;
 		}
 	}
 

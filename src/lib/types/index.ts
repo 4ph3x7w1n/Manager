@@ -19,17 +19,44 @@ export interface SlackChannel {
 }
 
 // Incident.io API Types
+export interface IncidentTimings {
+	time_to_detect_seconds?: number;
+	time_to_acknowledge_seconds?: number;
+	time_to_resolve_seconds?: number;
+	time_to_mitigate_seconds?: number;
+}
+
+export interface IncidentUpdate {
+	id: string;
+	message: string;
+	timestamp: string;
+	author: {
+		name: string;
+		email?: string;
+	};
+}
+
 export interface Incident {
 	id: string;
+	reference?: string;
 	title: string;
-	status: 'open' | 'closed' | 'resolved';
+	summary?: string;
+	status: 'open' | 'closed' | 'resolved' | 'declined' | 'live' | 'active';
 	severity: 'p1' | 'p2' | 'p3' | 'p4';
 	created_at: string;
 	updated_at: string;
+	closed_at?: string;
+	duration_seconds?: number;
+	timings?: IncidentTimings;
 	sla_timer?: {
 		duration_seconds: number;
 		remaining_seconds: number;
 		breached: boolean;
+	};
+	lead?: {
+		id: string;
+		name: string;
+		email: string;
 	};
 	assignee?: {
 		id: string;
@@ -40,7 +67,9 @@ export interface Incident {
 		id: string;
 		name: string;
 	};
+	postmortem_url?: string;
 	url: string;
+	updates?: IncidentUpdate[];
 }
 
 export interface IncidentSummary {
@@ -48,6 +77,8 @@ export interface IncidentSummary {
 	p1_count: number;
 	p2_count: number;
 	sla_breached: number;
+	uptime_percentage: number;
+	average_time_to_mitigate_minutes: number;
 	by_product: Array<{
 		product: string;
 		count: number;

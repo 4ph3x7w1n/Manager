@@ -12,9 +12,12 @@ id = "your-kv-namespace-id"
 preview_id = "your-preview-kv-namespace-id"
 
 [vars]
-# Environment variables will be added here
+# Incident.io Configuration
+# API keys are stored as secrets - use: wrangler secret put INCIDENT_IO_API_KEY
+INCIDENT_IO_ORGANIZATION = "yum"
+
+# Other integrations (to be configured)
 # SLACK_BOT_TOKEN = "your-slack-token"
-# INCIDENT_IO_API_KEY = "your-incident-io-key"
 # JIRA_API_TOKEN = "your-jira-token"
 # VACATION_TRACKER_API_KEY = "your-vacation-tracker-key"
 

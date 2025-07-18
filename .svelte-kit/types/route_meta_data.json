@@ -1,3 +1,42 @@
 {
-	"/": []
+	"/": [],
+	"/api/dashboard": [
+		"src/routes/api/dashboard/+server.ts"
+	],
+	"/api/debug-filter": [
+		"src/routes/api/debug-filter/+server.ts"
+	],
+	"/api/debug-incident": [
+		"src/routes/api/debug-incident/+server.ts"
+	],
+	"/api/debug-oncall-alt": [
+		"src/routes/api/debug-oncall-alt/+server.ts"
+	],
+	"/api/debug-oncall": [
+		"src/routes/api/debug-oncall/+server.ts"
+	],
+	"/api/debug-schedules": [
+		"src/routes/api/debug-schedules/+server.ts"
+	],
+	"/api/debug-timestamps": [
+		"src/routes/api/debug-timestamps/+server.ts"
+	],
+	"/api/debug-v2-incidents": [
+		"src/routes/api/debug-v2-incidents/+server.ts"
+	],
+	"/api/incidents-all": [
+		"src/routes/api/incidents-all/+server.ts"
+	],
+	"/api/incidents-v2": [
+		"src/routes/api/incidents-v2/+server.ts"
+	],
+	"/api/oncall-schedule": [
+		"src/routes/api/oncall-schedule/+server.ts"
+	],
+	"/api/test-incident": [
+		"src/routes/api/test-incident/+server.ts"
+	],
+	"/api/test-v2": [
+		"src/routes/api/test-v2/+server.ts"
+	]
 }
